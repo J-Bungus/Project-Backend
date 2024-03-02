@@ -17,11 +17,11 @@ const Schools = sequelize.define('Schools', {
         allowNull: false
     },
     about: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     blobURL: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true
     }
 });
