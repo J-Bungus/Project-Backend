@@ -12,7 +12,7 @@ router.post('/addSchool', upload.single('image'), async (req, res) => {
         console.log('working');
         console.log(req.body);
         const { name, about } = req.body;
-        console.log(req.file);
+        console.log("req.file: " + req.file);
         const { filename, buffer } = req.file;
         const newSchool = await addSchool({
             name: name, 
