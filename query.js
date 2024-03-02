@@ -10,8 +10,8 @@ const addSchool = async (school) => {
     const blobName = 'images' + uuidv1() + school.filename;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     const blobURL = blockBlobClient.url;
-    await blockBlobClient.uploadData(school.image);
-    try {
+    try {    
+        await blockBlobClient.uploadData(school.image);
         const newSchool = await Schools.create({
             name: school.name,
             about: school.about,

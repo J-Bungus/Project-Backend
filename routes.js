@@ -7,14 +7,16 @@ const storage = multer.memoryStorage()
 const upload = multer({ storage: storage });
 
 router.post('/addSchool', upload.single('image'), async (req, res) => {
+    console.log("working");
     try {
+        console.log('working');
         const { name, about } = req.body;
         const { filename, buffer } = req.file;
+        console.log(req.file);
         const newSchool = await addSchool({
             name: name, 
             about: about,
-            filename: filename,
-            image: buffer
+            url: blobURL
         });
         res.status(201).json(newSchool);
     } catch (err) {
