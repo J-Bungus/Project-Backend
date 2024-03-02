@@ -7,11 +7,15 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(process.env.BLO
 const containerClient = blobServiceClient.getContainerClient('dreamschools');
 
 const addSchool = async (school) => {
-    const blobName = 'images' + uuidv1() + school.filename;
-    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-    const blobURL = blockBlobClient.url;
-    try {    
+    let blobURL = "";
+    if (school.image) {
+        const blobName = 'images' + uuidv1() + school.filename;
+        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+        blobURL = blockBlobClient.url;
         await blockBlobClient.uploadData(school.image);
+    }
+   
+    try {  
         const newSchool = await Schools.create({
             name: school.name,
             about: school.about,
