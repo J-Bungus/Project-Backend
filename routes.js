@@ -14,7 +14,6 @@ router.post('/addSchool', upload.single('image'), async (req, res) => {
         const { name, about } = req.body;
         console.log(req.file);
         const { filename, buffer } = req.file;
-        console.log(req.file);
         const newSchool = await addSchool({
             name: name, 
             about: about,
@@ -23,7 +22,7 @@ router.post('/addSchool', upload.single('image'), async (req, res) => {
         });
         res.status(201).json(newSchool);
     } catch (err) {
-        res.status(500).json({ error: 'Internal server error at post'});
+        res.status(500).json({ error: 'Internal server error at post' + err});
     }
 });
 
