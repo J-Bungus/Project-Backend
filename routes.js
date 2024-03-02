@@ -7,13 +7,11 @@ const storage = multer.memoryStorage()
 const upload = multer({ storage: storage });
 
 router.post('/addSchool', upload.single('image'), async (req, res) => {
-    console.log("working");
     try {
-        console.log('working');
-        console.log(req.body);
         const { name, about } = req.body;
-        console.log("req.file: " + req.file);
-        const { filename, buffer } = req.file;
+        if (req.file) {
+            const { filename, buffer } = req.file;
+        }
         const newSchool = await addSchool({
             name: name, 
             about: about,
@@ -22,7 +20,7 @@ router.post('/addSchool', upload.single('image'), async (req, res) => {
         });
         res.status(201).json(newSchool);
     } catch (err) {
-        res.status(500).json({ error: 'Internal server error at post' + err});
+        res.status(500).json({ error: 'Internal server error at post ' + err});
     }
 });
 
