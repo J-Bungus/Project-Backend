@@ -9,14 +9,12 @@ const upload = multer({ storage: storage });
 router.post('/addSchool', upload.single('image'), async (req, res) => {
     try {
         const { name, about } = req.body;
-        if (req.file) {
-            const { filename, buffer } = req.file;
-        }
+        const { filename, buffer } = req.file ? req.file : { filename: "", buffer: null };
         const newSchool = await addSchool({
             name: name, 
             about: about,
             filename: filename,
-            image: buffer
+            image: buffer 
         });
         res.status(201).json(newSchool);
     } catch (err) {
