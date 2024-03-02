@@ -10,13 +10,16 @@ router.post('/addSchool', upload.single('image'), async (req, res) => {
     console.log("working");
     try {
         console.log('working');
+        console.log(req.body);
         const { name, about } = req.body;
+        console.log(req.file);
         const { filename, buffer } = req.file;
         console.log(req.file);
         const newSchool = await addSchool({
             name: name, 
             about: about,
-            url: blobURL
+            filename: filename,
+            image: buffer
         });
         res.status(201).json(newSchool);
     } catch (err) {
