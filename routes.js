@@ -41,15 +41,15 @@ router.get('/getSchools', async (req, res) => {
     }
 });
 
-router.get('/updateSchool', upload.single('image'), async (req, res) => {
+router.post('/updateSchool', upload.single('image'), async (req, res) => {
     try {
         const { id, name, about, blobURL, blobName } = req.body;
         if (req.file) {
             const { filename, buffer } = req.file;
             deleteBlob(id);
-            [ blobURL, blobName ] = addBlob({ filename: filename, image: buffer });
+            [ blobURL, blobName ] = await addBlob({ filename: filename, image: buffer });
         }
-        
+
         const updatedSchool = await updateSchool({
             id: id,
             name: name,
