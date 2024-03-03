@@ -46,6 +46,7 @@ router.post('/updateSchool', upload.single('image'), async (req, res) => {
         const { id, name, about } = req.body;
         let blobName = "";
         let blobURL = "";
+        console.log(req.file);
         if (req.file) {
             const { filename, buffer } = req.file;
             deleteBlob(id);
