@@ -43,7 +43,9 @@ router.get('/getSchools', async (req, res) => {
 
 router.post('/updateSchool', upload.single('image'), async (req, res) => {
     try {
-        const { id, name, about, blobURL, blobName } = req.body;
+        const { id, name, about } = req.body;
+        let blobName = "";
+        let blobURL = "";
         if (req.file) {
             const { filename, buffer } = req.file;
             deleteBlob(id);
@@ -60,7 +62,7 @@ router.post('/updateSchool', upload.single('image'), async (req, res) => {
 
         res.status(201).json(updatedSchool);
     } catch (err) {
-        res.status(500).json({ error: 'Internal server error while update school'});
+        res.status(500).json({ error: 'Internal server error while updating school: ' + err});
     }
 });
 
