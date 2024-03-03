@@ -20,6 +20,10 @@ const Schools = sequelize.define('Schools', {
         type: DataTypes.TEXT,
         allowNull: false
     },
+    blobName: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     blobURL: {
         type: DataTypes.TEXT,
         allowNull: true
