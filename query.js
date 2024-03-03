@@ -8,8 +8,9 @@ const containerClient = blobServiceClient.getContainerClient('dreamschools');
 
 const addSchool = async (school) => {
     let blobURL = "";
+    let blobName = "";
     if (school.image) {
-        const blobName = 'images' + uuidv1() + school.filename;
+        blobName = 'images' + uuidv1() + school.filename;
         const blockBlobClient = containerClient.getBlockBlobClient(blobName);
         blobURL = blockBlobClient.url;
         await blockBlobClient.uploadData(school.image);
