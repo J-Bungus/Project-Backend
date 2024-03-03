@@ -43,11 +43,8 @@ router.get('/getSchools', async (req, res) => {
 
 router.post('/updateSchool', upload.single('image'), async (req, res) => {
     try {
-        const { id, name, about } = req.body;
-        let blobName = "";
-        let blobURL = "";
+        const { id, name, about, blobURL, blobName} = req.body;
         if (req.file) {
-            console.log("entered into if statement to delete blob!!");
             const { filename, buffer } = req.file;
             deleteBlob(id);
             [ blobURL, blobName ] = await addBlob({ filename: filename, image: buffer });
