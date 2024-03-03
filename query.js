@@ -55,7 +55,7 @@ const updateSchool = async (updateData) => {
             blobURL: blobURL
         });
         await school.save();
-        
+
         return school;
 
     } catch (err) {
@@ -67,9 +67,10 @@ const deleteBlob = async (id) => {
     try {
         const school = await Schools.findByPk(id);
         const blobName = school.blobName;
-        containerClient.deleteBlob(blobName);
+        if (blobName) {
+            containerClient.deleteBlob(blobName);
+        }
 
-        return blobName;
     } catch (err) {
         console.err("Error while retrieving blob name");
     }
